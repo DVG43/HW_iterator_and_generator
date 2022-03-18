@@ -15,13 +15,12 @@ class FlatIterator:
     def __next__(self):
        for element in self.some_list:
            for any_element in element:
-               print (any_element)
-       raise StopIteration
+               if isinstance(any_element, str):
+                   print(f"'{any_element}'")
+               else:
+                   print(any_element)
 
-        # self.start += 1
-        # if self.start == self.end:
-        #     raise StopIteration
-        # return self.start
+       raise StopIteration
 
 
 if __name__ == '__main__':
