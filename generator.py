@@ -9,7 +9,6 @@ def flat_generator(n_list):
 		for any_element in element:
 			yield any_element
 
-        #print(new_list)
 
 
 
