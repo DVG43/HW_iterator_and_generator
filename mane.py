@@ -31,23 +31,23 @@ class FlatIterator:
     def __iter__(self):
         self.main_list_cursor = 0  # курсор основного списка
         self.nested_list_cursor = 0  # курсор списка вложенного в основной список
+        self.counter = 0
         return self
 
     def __next__(self):
+          if self.counter != 0:
+               self.nested_list_cursor += 1 # увеличиваем nested_list_cursor
 
+               if self.nested_list_cursor == len(self.main_list[self.main_list_cursor]): #-1:# если во вложенном списке элементы закончились,
 
-           self.nested_list_cursor += 1 # увеличиваем nested_list_cursor
+                      self.main_list_cursor += 1     # то переходи на следующий список увеличив main_list_cursor
 
-           if self.nested_list_cursor == len(self.main_list[self.main_list_cursor]): #-1:# если во вложенном списке элементы закончились,
+                      self.nested_list_cursor = 0  # и обнуляем nested_list_cursor
 
-                  self.main_list_cursor += 1     # то переходи на следующий список увеличив main_list_cursor
-
-                  self.nested_list_cursor = 0  # и обнуляем nested_list_cursor
-
-           if self.main_list_cursor == len(self.main_list):
-                raise StopIteration
-
-           return self.main_list[self.main_list_cursor][self.nested_list_cursor]
+               if self.main_list_cursor == len(self.main_list):
+                    raise StopIteration
+          self.counter += 1
+          return self.main_list[self.main_list_cursor][self.nested_list_cursor]
 
 
 
